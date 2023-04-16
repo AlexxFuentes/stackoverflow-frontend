@@ -1,1 +1,123 @@
 /* You can add global styles to this file, and also import other style files */
+.logo {
+    width: 200px;
+}
+
+.profile-pic {
+    width: 50px;
+    margin-left: 10px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.small-profile-pic {
+    width: 25px;
+    margin-left: 10px;
+    border-radius: 100px;
+}
+
+.navbar {
+    border-top: 4px solid #F48023;
+}
+
+.btn-warning {
+    background-color: #F48023;
+    border-color: #F48023;
+}
+
+.btn-outline-warning {
+    border-color: #F48023;
+    color: #F48023;
+}
+
+.btn-warning:hover {
+    background-color: #ce650f;
+    border-color: #ce650f;
+}
+
+.btn-outline-warning:hover {
+    background-color: #F48023;
+    border-color: #ce650f;
+    color: #fff;
+}
+
+.question-row {
+    border-bottom: 1px solid rgb(230, 230, 230);
+    padding: 20px 10px 10px 10px;
+}
+
+.badge-warning {
+    color: #fff !important;
+    background-color: #f8cea1 !important;
+}
+
+.user-text {
+    color: rgb(83, 138, 255);
+}
+
+.arrow {
+    fill: rgb(173, 173, 173);
+    width: 32px;
+    cursor: pointer;
+}
+
+.question {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 45px 15px;
+    border-top: 1px solid rgb(226, 226, 226);
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+.answer {
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 45px 15px;
+    /* border-top: 1px solid rgb(226, 226, 226); */
+    border-bottom: 1px solid rgb(226, 226, 226);
+}
+
+pre {
+    background-color: #eeeeee;
+    padding: 26px;
+    margin-top: 5px;
+}
+
+.user-card {
+    background-color: rgb(234, 241, 255);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.select-image {
+    cursor: pointer;
+    border: 1px solid rgb(223, 223, 223);
+    transition: all .3s ease-in-out;
+    border-radius: 100px;
+}
+
+.select-image:hover {
+    border: 1px solid #F48023;
+}
+
+.visible{
+    display: block;
+}
+
+.not-visible{
+    display: none;
+}
+
+.error{
+    background-color: rgba(235, 67, 67, 0.514);
+    color: white;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+    font-size: .8rem;
+}
+
+.input-error{
+    border-color: red;
+}

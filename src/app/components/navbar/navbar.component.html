@@ -1,0 +1,76 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img class="logo" src="../../../assets/img/logo.png" alt=""></a>
+
+        <div class="row g-3">
+            <div class="col-auto">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="button">Search</button>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="button"
+                    (click)="open(ModalRegistrarUsuario)">Registrarse</button>
+            </div>
+            <div class="col-auto">
+                <img [src]="fPerfil ? '../../../assets/' + fPerfil : '../../../assets/img/perfil.png'" class="profile-pic" 
+                    (click)="open(ModalCambiarUsuario)">
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--Modal cambiar usuario-->
+<ng-template #ModalCambiarUsuario let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Lista de usuarios</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-3 p-0 m-0" *ngFor="let usuario of listaUsuarios">
+                <img [src]="'../../../assets/' + usuario.urlImagen" class="img-fluid select-image"
+                    (click)="cambiarUsuario(usuario._id, usuario.urlImagen)">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cerrar</button> -->
+    </div>
+</ng-template><!--Modal cambiar usuario-->
+
+
+<!--Modal registrar usuario-->
+<ng-template #ModalRegistrarUsuario let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form action="">
+            <div class="row g-3 align-items-center pb-2">
+                <div class="col-auto">
+                    <label for="input-nombre" class="col-form-label">Nombre</label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" [(ngModel)]="nombreUsuario" id="input-nombre" name="input-nombre" class="form-control">
+                </div>
+            </div>
+            <div class="row g-3 align-items-center pb-2">
+                <div class="col-auto">
+                    <label for="select-fotoperfil" class="col-form-label">Foto perfil</label>
+                </div>
+                <div class="col-auto">
+                    <select class="form-select" [(ngModel)]="fotoPerfil" id="select-fotoperfil" name="select-fotoperfil">
+                        <option selected>Seleccione una foto de perfil</option>
+                        <option *ngFor="let n of getRange(33)" [value]="'img/profile-pics/'+ n +'.jpg'">{{n}}.jpg</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="guardarusuario()">Guardar</button>
+    </div>
+</ng-template><!--Modal registrar usuario-->

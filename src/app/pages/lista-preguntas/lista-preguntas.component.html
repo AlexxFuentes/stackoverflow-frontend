@@ -1,0 +1,89 @@
+<main class="container mt-5" id="listaPreguntas">
+    <div class="row">
+        <div class="col-12">
+            <h2>Preguntas Top</h2>
+            <button [disabled]="!inIdUsuarioSeleccionado" class="btn btn-outline-warning btn-sm" (click)="open(ModalNuevaPregunta)">Nueva Pregunta</button>
+        </div>
+    </div>
+    <!-- Item pregunta-->
+    <div class="row question-row" *ngFor="let pregunta of listaPreguntasUsuario">
+        <div class="col-md-2 col-lg-1 text-center text-muted small">
+            <div>{{pregunta.votos}}</div>
+            <div>Votos</div>
+        </div>
+        <div class="col-md-2 col-lg-1 text-center text-muted small">
+            <div>{{pregunta.respuestas.length}}</div>
+            <div>Respuestas</div>
+        </div>
+        <div class="col-md-2 col-lg-1 text-center text-muted small">
+            <div>{{pregunta.vistas}}</div>
+            <div>Vistas</div>
+        </div>
+        <div class="col-md-6 col-lg-9">
+            <div>
+                <button class="btn btn-link" (click)="verDetallePregunta(pregunta._id)">{{pregunta.titulo}}</button>
+            </div>
+            <div class="d-flex gap-2">
+                <span class="badge badge-warning" *ngFor="let hashtag of pregunta.hashtags">{{hashtag}}</span>
+            </div>
+            <div class="float-end d-flex gap-2">
+                <span class="small text-muted">{{pregunta.fecha}}</span>
+                <span class="small user-text">{{pregunta.usuario[0].nombre}}</span>
+                <img [src]="'../../../assets/' + pregunta.usuario[0].urlImagen" class="small-profile-pic">
+            </div>
+        </div>
+    </div>
+    <!-- Fin Itemn pregunta -->
+</main>
+
+<!-- Modal Nueva pregunta -->
+<ng-template #ModalNuevaPregunta let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Nueva Pregunta</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                    <form action="" [formGroup]="formularioNuevaPregunta">
+                        <h5>Pregunta</h5>
+                        <textarea formControlName="pregunta"
+                        [ngClass]="{'input-error': pregunta?.invalid && (pregunta?.dirty || pregunta?.touched)}" 
+                        class="form-control" cols="30" rows="3" placeholder="Escriba su pregunta." required></textarea>
+
+                        <div *ngIf="pregunta?.invalid && (pregunta?.dirty || pregunta?.touched)" class="error">
+                            <span *ngIf="pregunta?.errors?.['required']">Error el campo es obligatorio</span>
+                        </div>
+                        
+                        
+                        <h5>Descripción</h5>
+                        <textarea formControlName="descripcion" name="descripcion"
+                        [ngClass]="{'input-error': descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)}" 
+                        class="form-control" cols="30" rows="7" placeholder="Escriba de forma detalla su problema." required></textarea>
+
+                        <div *ngIf="descripcion?.invalid && (descripcion?.dirty || descripcion?.touched)" class="error">
+                            <span *ngIf="descripcion?.errors?.['required']">Error el campo es obligatorio</span>
+                        </div>
+                        
+                        
+                        <h5>Hashtags</h5>
+                        <span class="small text-muted">Etiquetas permitidas: br, pre</span><br>
+                        <input formControlName="hashtags" name="hashtags" 
+                        [ngClass]="{'input-error': hashtags?.invalid && (hashtags?.dirty || hashtags?.touched)}" 
+                        class="form-control" placeholder="Hashtags (separadas por coma)" required> 
+
+                        <div *ngIf="hashtags?.invalid && (hashtags?.dirty || hashtags?.touched)" class="error">
+                            <span *ngIf="hashtags?.errors?.['required']">Error el campo es obligatorio</span>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-outline-warning" [disabled]="!formularioNuevaPregunta.valid" (click)="guardarPregunta()">Publicar</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cross click')">Cancelar</button>
+    </div>
+</ng-template><!-- Modal Nueva pregunta -->

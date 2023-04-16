@@ -1,0 +1,94 @@
+<main class="container mt-5" id="detallePregunta">
+
+    <div class="row">
+        <div class="col-12">
+            <h2>
+                <svg class="arrow" (click)="verPreguntas()" width="36" height="36" viewBox="0 0 36 36">
+                    <path d="M16,0,16,32,0,16Z"></path>
+                </svg> {{detallePregunta.titulo}}
+            </h2>
+            <!-- <p class="card-header">{{detallePregunta.descripcion}}</p> -->
+        </div>
+    </div>
+    <div class="row question" >
+        <div class="col-1 text-center">
+            <div>
+                <svg class="arrow" (click)="votar(1, detallePregunta._id)" width="36" height="36" viewBox="0 0 36 36">
+                    <path d="M2 26h32L18 10 2 26z"></path>
+                </svg>
+            </div>
+            <div class="h4 text-muted m-0">{{detallePregunta.votos}}</div>
+            <div>
+                <svg class="arrow" (click)="votar(-1, detallePregunta._id)" width="36" height="36" viewBox="0 0 36 36">
+                    <path d="M2 10h32L18 26 2 10z"></path>
+                </svg>
+            </div>
+        </div>
+        <div class="col-10">{{detallePregunta.descripcion}}</div>
+        <div class="col-12">
+            <div class="float-end text-center user-card">
+                <div class="text-muted small">{{detallePregunta.fecha}}</div>
+                <div>
+                    <img [src]="'../../../assets/' + usuarioSeleccionado?.urlImagen" class="small-profile-pic mr-2"> 
+                    {{usuarioSeleccionado.nombre}}
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <span class="badge badge-warning" *ngFor="let hashtag of detallePregunta.hashtags">{{hashtag}}</span>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <h5>{{detallePregunta?.respuestas?.length}} Respuestas</h5>
+    </div>
+    <!-- Respuesta -->
+    <div class="row question" *ngFor="let respuesta of detallePregunta.respuestas">
+        
+        <div class="col-1 text-center">
+            <div>
+                <svg class="arrow" (click)="votarRespuesta(1, respuesta._id)" width="36" height="36" viewBox="0 0 36 36">
+                    <path d="M2 26h32L18 10 2 26z"></path>
+                </svg>
+            </div>
+            <div class="h4 text-muted m-0">{{respuesta.votos}}</div>
+            <div>
+                <svg class="arrow" (click)="votarRespuesta(-1, respuesta._id)" width="36" height="36" viewBox="0 0 36 36">
+                    <path d="M2 10h32L18 26 2 10z"></path>
+                </svg>
+            </div>
+        </div>
+
+        <div class="col-10">{{respuesta.descripcion}}</div>
+        <div class="col-12">
+            <div class="float-end text-center user-card">
+                <div class="text-muted small">{{respuesta.fecha}}</div>
+                <div>
+                    <img [src]="'../../../assets/' + respuesta.urlImagen" class="small-profile-pic mr-2"> 
+                    {{respuesta.nombre}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Respuesta -->
+
+    <!-- Formulario nueva respuesta -->
+    <div class="row">
+        <div class="col-12">
+            <form action="" [formGroup]="formularioRespuesta">
+                <h5>Nueva Respuesta</h5>
+                <textarea formControlName="respuesta" name="respuesta"
+                [ngClass]="{'input-error': respuesta?.invalid && (respuesta?.dirty || respuesta?.touched)}" 
+                class="form-control" cols="30" rows="7" placeholder="Respuesta" required></textarea>
+                <span class="small text-muted">Etiquetas permitidas: br, pre</span><br>
+
+                <div *ngIf="respuesta?.invalid && (respuesta?.dirty || respuesta?.touched)" class="error">
+                    <span *ngIf="respuesta?.errors?.['required']">Error el campo es obligatorio</span>
+                </div>
+
+                <button class="btn btn-outline-warning" *ngIf="inIdUsuario" [disabled]="!formularioRespuesta.valid" (click)="publicarRespuesta()">Publicar</button>
+            </form>
+        </div>
+    </div>
+    <hr class="my-5">
+</main>
